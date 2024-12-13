@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\RBHOLA\\Desktop\\CDPro\\CropDealBackend\\wwwroot\\Upload\\Product\\001\\001.png",
+      "PackagePath": "staticwebassets\\Upload\\Product\\001\\001.png"
+    },
+    {
+      "Id": "C:\\Users\\RBHOLA\\Desktop\\CDPro\\CropDealBackend\\wwwroot\\Upload\\Product\\001\\er.png",
+      "PackagePath": "staticwebassets\\Upload\\Product\\001\\er.png"
+    },
+    {
+      "Id": "C:\\Users\\RBHOLA\\Desktop\\CDPro\\CropDealBackend\\wwwroot\\Upload\\Product\\001\\rr.png",
+      "PackagePath": "staticwebassets\\Upload\\Product\\001\\rr.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CropDealBackend.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.CropDealBackend.props",
+      "PackagePath": "build\\CropDealBackend.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.CropDealBackend.props",
+      "PackagePath": "buildMultiTargeting\\CropDealBackend.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.CropDealBackend.props",
+      "PackagePath": "buildTransitive\\CropDealBackend.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

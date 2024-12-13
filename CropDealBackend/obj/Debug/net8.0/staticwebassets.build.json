@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "HKNo8oycsqO17+RNWyzsQ5/6sKHdZJ56vkzN83KUEzo=",
+  "Source": "CropDealBackend",
+  "BasePath": "_content/CropDealBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "CropDealBackend\\wwwroot",
+      "Source": "CropDealBackend",
+      "ContentRoot": "C:\\Users\\RBHOLA\\Desktop\\CDPro\\CropDealBackend\\wwwroot\\",
+      "BasePath": "_content/CropDealBackend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
