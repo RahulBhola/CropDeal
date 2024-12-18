@@ -1,0 +1,101 @@
+<div style="background: radial-gradient(circle at center,rgba(39, 75, 21, 0.95) 0%, rgba(99, 121, 55, 0.85) 50%, rgba(108, 189, 53, 0.8) 100%);">
+  <div class="py-5" style="margin: 0 190px;">
+    <h1 class="mb-4" style="color: #f5f5f5; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); font-family: 'Roboto Slab', serif;">View Added Crops</h1>
+    <div *ngIf="crops.length > 0; else noCrops">
+      <div *ngFor="let crop of crops" class="d-flex justify-content-between align-items-center mb-4" style="border-radius: 50px; padding: 25px 50px; background: rgba(255, 255, 255, 0.9); box-shadow: inset -5px 5px 7px rgba(0, 0, 0, 0.9);">
+        <!-- Image -->
+        <img class="me-3 image" [src]="'data:image/jpeg;base64,' + crop.imageData" alt="Crop Image"  />
+        <!-- Content -->
+        <div style="color: #2e4829;">
+          <h2 class="text-uppercase" style="color: #1b5e20; margin-bottom: 10px;">{{ crop.cropName }}</h2>
+          <div style="color: #455a64;">{{ crop.description }}</div>
+          <div style="color: #455a64; margin-top: 5px;">Quantity: {{ crop.availableQuantity }}</div>
+          <!-- <div style="color: #455a64;">Type: {{ crop.type }}</div> -->
+        </div>
+        <!-- Price -->
+        <div class="text-end" style="width: 450px;">
+          <div class="fw-bold" style="font-size: 25px; color: #2e7d32;">₹{{ crop.pricePerKg }} / Kg</div>
+          <!-- Edit and Delete Buttons -->
+          <div class="mt-2">
+            <i class="bx bx-edit-alt me-2" (click)="onEditCrop(crop)" style="font-size: 28px; color: #558b2f; cursor: pointer; transition: color 0.2s ease;"></i>
+            <i class="bx bx-trash" (click)="onDeleteCrop(crop.cropId)" style="font-size: 28px; color: #c62828; cursor: pointer; transition: color 0.2s ease;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- No Crops Message -->
+    <ng-template #noCrops>
+      <div class="text-center">
+        <h3>No crops added yet!</h3>
+      </div>
+    </ng-template>
+  </div>
+  <!-- Edit Crop Modal (Full screen with dimmed background) -->
+  <div *ngIf="showEditModal"
+    class="modal-overlay position-fixed top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center zindex-1050"
+    (click)="closeEditModal()">
+    <div class="modal-container px-5 pt-4 rounded shadow-sm" (click)="stopPropagation($event)">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="m-1 fw-bold" style="color: white;">Edit Crop</h2>
+        <i class="bx bx-cut bx-burst bx-flip-horizontal text-white fw-bold" (click)="closeEditModal()" style="font-size: 28px; cursor: pointer;"></i>
+      </div>
+      <hr>
+      <form [formGroup]="editForm" (ngSubmit)="onSubmitEdit()">
+        <!-- Image Upload Section -->
+        <div class="d-flex justify-content-center align-items-center border"
+          style="border-radius: 25px; height: 200px; position: relative;">
+          <!-- Image Preview -->
+          <!-- <img id="imagePreview" class="img-fluid" style="border-radius: 25px; display: none;" alt="Preview" /> -->
+          <!-- Upload Button -->
+          <!-- *ngIf="!imageUrl"  -->
+          <label for="uploadImage" class="d-flex flex-column align-items-center justify-content-center"
+            style="position: absolute; cursor: pointer; text-align: center;">
+            <i class="bx bx-upload add-icon" style="font-size: 40px; color: #777;"></i>
+            <span class="text-white fw-bold">Click to upload</span>
+          </label>
+          <!-- File Input -->
+          <input type="file" id="uploadImage" accept="image/*" (change)="onImageSelected($event)"
+            style="border-radius: 25px; display: none;" />
+          <!-- Display the preview of the selected image -->
+          <div *ngIf="previewImageUrl">
+            <img [src]="previewImageUrl" alt="Image Preview" style="border-radius: 25px; width: 100%; height: 150px;" />
+          </div>
+        </div>
+        <!-- Crop Name -->
+        <div class="my-3">
+          <label for="cropName" class="form-label text-white fw-bold">Crop Name</label>
+          <input type="text" id="cropName" class="form-control" placeholder="Enter crop name"
+            formControlName="cropName" />
+        </div>
+        <div class="d-flex justify-content-between">
+          <!-- Quantity -->
+          <div class="mb-3">
+            <label for="cropQuantity" class="form-label text-white fw-bold">Crop Quantity</label>
+            <input type="text" id="cropQuantity" class="form-control" placeholder="Enter crop quantity"
+              formControlName="availableQuantity" />
+          </div>
+          <!-- PricePerKg -->
+          <div class="mb-3">
+            <label for="cropPricePerKg" class="form-label text-white fw-bold">Crop Price Per Kg</label>
+            <input type="text" id="cropPricePerKg" class="form-control" placeholder="Enter crop price per kg"
+              formControlName="pricePerKg" style="width: 350px;" />
+          </div>
+        </div>
+        <!-- Description -->
+        <div class="mb-3">
+          <label for="description" class="form-label text-white fw-bold">Description</label>
+          <textarea class="form-control" rows="4" placeholder="Write a description..."
+            formControlName="description"></textarea>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-end">
+          <div class="d-flex align-items-center">
+            <div class="me-3 p-2 border text-white" style="border-radius: 10px ; cursor: pointer;"(click)="closeEditModal()">Cancel</div>
+            <button class="p-2" style="background-color: white; border-radius: 10px;" [disabled]="editForm.invalid">Save changes</button>
+          </div>
+        </div>
+      </form>
+      <div>
+      </div>
+    </div>
+  </div>

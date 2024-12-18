@@ -1,0 +1,180 @@
+<div class="d-flex justify-content-center align-items-center gradient-bg">
+    <div class="container position-relative bg-white shadow-lg rounded-4 custom-container" [class.active]="isActive">
+        <!-- Login Form -->
+        <div class="form-box position-absolute top-0 end-0 w-50 h-100 d-flex align-items-center text-center text-dark p-4 login">
+            <form [formGroup]="loginFormData" (ngSubmit)="onLogin()">
+                <h1 class="mb-2">Login</h1>
+                <!--Email-->
+                <div class="mb-3 position-relative">
+                    <input class="form-control bg-body-secondary" placeholder="Email" formControlName="loginEmail" />
+                    <i class="bx bxs-envelope position-absolute top-50 translate-middle-y end-0 pe-3"></i>
+                </div>
+                <div class="error-feedback" *ngIf="hasDisplayableLoginError('loginEmail')">
+                    <div *ngIf="loginFormData.controls['loginEmail'].hasError('required')" >
+                        Email is required.
+                    </div>
+                    <div *ngIf="loginFormData.controls['loginEmail'].hasError('pattern')" >
+                        Invalid email format.
+                    </div>
+                </div>
+                
+                <!--Password-->
+                <div class="mb-3 position-relative">
+                    <input [type]="passwordVisible? 'text':'password' " class="form-control bg-body-secondary" placeholder="Password" formControlName="loginPassword" />
+                    <i class="bx position-absolute top-50 translate-middle-y end-0 pe-3" [ngClass]="passwordVisible? 'bx-show': 'bx-hide' " (click)="togglePasswordVisibility()" ></i>
+                </div>
+                <div class="error-feedback" *ngIf="hasDisplayableLoginError('loginPassword')" >
+                    <div *ngIf="loginFormData.controls['loginPassword'].hasError('required')" >
+                        Password is required.
+                    </div>
+                    <div *ngIf="loginFormData.controls['loginPassword'].hasError('pattern')" >
+                        Password must be at least one uppercase letter, one lowercase letter, one digit, and one special character.
+                    </div>
+                </div>
+
+                <!--Role Selection-->
+                <div class="mb-3 position-relative">
+                    <select 
+                        class="form-select bg-body-secondary" 
+                        formControlName="loginRole"
+                    >
+                        <option value="" disabled selected>Select Role</option>
+                        <option value="Farmer">Farmer</option>
+                        <option value="Dealer">Dealer</option>
+                    </select>
+                </div>
+                <div class="error-feedback" *ngIf="hasDisplayableLoginError('loginRole')">
+                    <div *ngIf="loginFormData.controls['loginRole'].hasError('required')">
+                        Please select a role.
+                    </div>
+                </div>
+            
+                <!--Button-->
+                <div class="mt-4">
+                    <button type="submit"  class="w-100 rounded-3 py-2 px-4 fw-bold text-uppercase custom-btn">Login</button>
+                </div>
+            </form>
+        </div>
+        
+
+        <!-- Register Form -->
+        <div class="register form-box position-absolute top-0 start-0 w-50 h-100 d-flex align-items-center text-center text-dark p-4 register">
+            <form [formGroup]="registerFormData" (ngSubmit)="onRegister()" >
+                <h1 class="mb-4">Registration</h1>
+
+                <div class="d-flex">
+                    <div>
+                        <!--FirstName-->
+                         <div class="mb-3 me-2 position-relative">
+                             <input type="text" class="form-control bg-body-secondary pe-5" placeholder="First Name" formControlName="firstName" />
+                             <i class="bx bxs-user position-absolute top-50 end-0 translate-middle-y pe-3"></i>
+                         </div>
+                         <div class="error-feedback" *ngIf="hasDisplayableRegisterError('firstName')">
+                             <div *ngIf="registerFormData.controls['firstName'].hasError('required')" >
+                                Enter your first name.
+                             </div>
+                             <div *ngIf="registerFormData.controls['firstName'].hasError('minlength') && !registerFormData.controls['firstName'].hasError('required')">
+                                 Firstname must be at least 3 characters.
+                             </div>
+                             <div *ngIf="registerFormData.controls['firstName'].hasError('pattern') && !registerFormData.controls['firstName'].hasError('required') && !registerFormData.controls['firstName'].hasError('minlength')">
+                                 Firstname can only contain letters (no numbers or special characters).
+                             </div>
+                         </div>
+                    </div>
+     
+                     <!--LastName-->
+                     <div>
+                        <div class="mb-3 position-relative">
+                             <input type="text" class="form-control bg-body-secondary pe-5" placeholder="Last Name" formControlName="lastName" />
+                             <i class="bx bxs-user position-absolute top-50 end-0 translate-middle-y pe-3"></i>
+                        </div>
+                        <div class="error-feedback" *ngIf="hasDisplayableRegisterError('lastName')">
+                             <div *ngIf="registerFormData.controls['lastName'].hasError('required')" >
+                                Enter your last name.
+                             </div>
+                             <div *ngIf="registerFormData.controls['lastName'].hasError('minlength') && !registerFormData.controls['lastName'].hasError('required')">
+                                 Lastname must be at least 3 characters.
+                             </div>
+                             <div *ngIf="registerFormData.controls['lastName'].hasError('pattern') && !registerFormData.controls['lastName'].hasError('required') && !registerFormData.controls['lastName'].hasError('minlength')">
+                                 Lastname can only contain letters (no numbers or special characters).
+                             </div>
+                        </div>
+                     </div>
+                </div>
+
+                <!--Email -->
+                <div class="mb-3 position-relative">
+                    <input type="email" class="form-control bg-body-secondary" placeholder="Email" formControlName="email" />
+                    <i class="bx bxs-envelope position-absolute top-50 translate-middle-y end-0 pe-3"></i>
+                </div>
+                <div class="error-feedback" *ngIf="hasDisplayableRegisterError('email')">
+                    <div *ngIf="registerFormData.controls['email'].hasError('required')" >
+                        Email is required.
+                    </div>
+                    <div *ngIf="registerFormData.controls['email'].hasError('pattern')" >
+                        Invalid email format.
+                    </div>
+                </div>
+
+                <!--Password -->
+                <div class="mb-3 position-relative">
+                    <input [type]="passwordVisible? 'text':'password' " class="form-control bg-body-secondary" placeholder="Password" formControlName="password" />
+                    <i class="bx position-absolute top-50 translate-middle-y end-0 pe-3" [ngClass]="passwordVisible? 'bx-show': 'bx-hide' " (click)="togglePasswordVisibility()" ></i>
+                </div>
+                <div class="error-feedback" *ngIf="hasDisplayableRegisterError('password')" >
+                    <div *ngIf="registerFormData.controls['password'].hasError('required')" >
+                        Password is required.
+                    </div>
+                    <div *ngIf="registerFormData.controls['password'].hasError('pattern')" >
+                        Password must be at least one uppercase letter, one lowercase letter, one digit, and one special character.
+                    </div>
+                </div>
+
+                <!--Confirm password-->
+                <div class="mb-3 position-relative">
+                    <input [type]="passwordVisible? 'text':'password' " class="form-control bg-body-secondary" placeholder="Confirm Password" formControlName="confirmPassword" />
+                    <i class="bx position-absolute top-50 translate-middle-y end-0 pe-3" [ngClass]="passwordVisible? 'bx-show': 'bx-hide' " (click)="togglePasswordVisibility()" ></i>
+                </div>
+                <div class="error-feedback" *ngIf="hasDisplayableRegisterError('confirmPassword') && registerFormData.controls['confirmPassword'].hasError('passwordMismatch')" >
+                    Passwords doesn't match.
+                </div>
+
+                <!--Role Selection-->
+                <div class="mb-3 position-relative">
+                    <select 
+                        class="form-select bg-body-secondary" 
+                        formControlName="role"
+                    >
+                        <option value="" disabled selected>Select Role</option>
+                        <option value="Farmer">Farmer</option>
+                        <option value="Dealer">Dealer</option>
+                    </select>
+                </div>
+                <div class="error-feedback" *ngIf="hasDisplayableRegisterError('role')">
+                    <div *ngIf="registerFormData.controls['role'].hasError('required')">
+                        Please select a role.
+                    </div>
+                </div>
+
+                <!--Button-->
+                <div class="mt-4">
+                    <button type="submit" class="w-100 rounded-3 py-2 px-4 fw-bold text-uppercase custom-btn">Register</button>
+                </div> 
+            </form>
+        </div>
+
+        <!-- Toggle Panels -->
+        <div class="toggle-box">
+            <div class="toggle-panel toggle-left">
+                <h1>Hello, Welcome!</h1>
+                <p>Don't have an account?</p>
+                <button class="btn bg-light" (click)="toggleForm(true)">Register</button>
+            </div>
+            <div class="toggle-panel toggle-right">
+                <h1>Welcome Back!</h1>
+                <p>Already have an account?</p>
+                <button class="btn bg-light" (click)="toggleForm(false)">Login</button>
+            </div>
+        </div>
+    </div>
+</div>

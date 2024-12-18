@@ -1,0 +1,172 @@
+<div style="background: radial-gradient(circle at center,rgba(39, 75, 21, 0.95) 0%, rgba(99, 121, 55, 0.85) 50%, rgba(108, 189, 53, 0.8) 100%); height: 220px; border-radius: 0 0 50px 50px;">
+    <div class="text-center pt-5 text-white">
+        <h4>Profile</h4>
+        <h1 class="fw-bold" style="font-family: 'Roboto Slab', serif;">Profile Settings</h1>
+    </div>
+    <div class="mt-5 w-75 mx-auto">
+        <ul class="d-flex list-unstyled" style="background-color:  rgb(180, 207, 126); border-radius: 25px;">
+            <li 
+                *ngFor="let tab of tabs" 
+                [ngClass]="{active: selectedTab === tab.id}"
+                (click)="selectTab(tab.id)"
+                class="p-4 col-3 text-center fw-bold" 
+                style="cursor: pointer;"
+            >{{tab.label}}</li>
+        </ul>
+        <div class="tab-content">
+            @switch (selectedTab) {
+                @case(tabs[0].id){
+                    <ng-container>
+                        <div class="d-flex mt-4" style="padding-bottom: 50px;">
+                            <div *ngIf="userDetails" class="p-4 text-center" style="width: 30%; background-color: wheat; border-radius: 8px;" >
+                                <img *ngIf="userRole==='Farmer'" src="/img/profile/profile-pic.jpg" class="mb-3"  style="border-radius: 65px; width: 280px; height: 250px;"/>
+                                <img *ngIf="userRole==='Dealer'" src="/img/profile/dealer.jpg" class="mb-3"  style="border-radius: 65px; width: 280px; height: 250px;"/>
+
+                                <h2>{{firstName}} {{lastName}}</h2>
+                                <hr>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class='bx bx-location-plus me-2'></i>
+                                    <div>{{viewAddressDetails.landMark}}, {{viewAddressDetails.state}}, {{viewAddressDetails.country}}</div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class='bx bx-message-dots me-2'></i>
+                                    <div>{{userDetails.email}}</div>
+                                </div>
+                                <div class="d-flex align-items-center" >
+                                    <i class='bx bx-phone-call me-2'></i>
+                                    <div>{{userDetails.phoneNumber}}</div>
+                                </div>
+                            </div>
+                            <div *ngIf="userDetails" class=" mx-4" style="width: 90%;" >
+                                <div style="padding: 22px; margin-bottom: 20px; background-color: wheat; border-radius: 8px;">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h3>Profile Details</h3>
+                                        <i class='bx bxs-edit bx-tada' style="font-size: 25px; cursor: pointer;" (click)="onEditDetails()" ></i>
+                                    </div>
+                                    <div class="d-flex justify-content-between py-2">
+                                        <div>First Name</div>
+                                        <div>{{firstName}}</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between pb-2">
+                                        <div>Last Name</div>
+                                        <div>{{lastName}}</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between pb-2">
+                                        <div>Email</div>
+                                        <div>{{userDetails.email}}</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between pb-2">
+                                        <div>Phone Number</div>
+                                        <div>{{userDetails.phoneNumber}}</div>
+                                    </div>
+                                </div>
+                                
+                                <div style="padding: 22px; background-color: wheat; border-radius: 8px;">
+                                    <h3>Shipping Address</h3>
+                                    <div class="d-flex justify-content-between py-2">
+                                        <div>Country</div>
+                                        <div>{{viewAddressDetails.country}}</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between pb-2">
+                                        <div>State</div>
+                                        <div>{{viewAddressDetails.state}}</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between pb-2">
+                                        <div>District</div>
+                                        <div>{{viewAddressDetails.district}}</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between pb-2">
+                                        <div>City</div>
+                                        <div>{{viewAddressDetails.city}}</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between pb-2">
+                                        <div>Zip Code</div>
+                                        <div>{{viewAddressDetails.pinCode}}</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between pb-2">
+                                        <div>Landmark</div>
+                                        <div>{{viewAddressDetails.landMark}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width: 90%;">
+                                <div style="padding: 22px; background-color: wheat; border-radius: 8px;" >
+                                    <h3>Account Details</h3>
+                                    <hr>
+                                    <img src="/img/profile/card.png" style="height: 200px ;width: 350px; border-radius: 15px; margin: 30px 0;"  />
+                                    <hr>
+                                    <div class="d-flex justify-content-between pb-3">
+                                        <div>Bank Name</div>
+                                        <div>{{viewBankDetails.bankName}}</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between pb-3">
+                                        <div>Account Number</div>
+                                        <div>{{viewBankDetails.accountNumber}}</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between pb-4">
+                                        <div>IFSC Code</div>
+                                        <div>{{viewBankDetails.ifsc}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="showEditAccountDetailsModel" class="modal-overlay position-fixed top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center zindex-1050" (click)="closeEditAccountDetailsModel()">
+                            <div class="modal-container px-5 pt-4 rounded shadow-sm" (click)="stopPropagation($event)">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h2 class="m-1 fw-bold">Edit Account Details</h2>
+                                    <i class="bx bx-cut bx-burst bx-flip-horizontal fw-bold" (click)="closeEditAccountDetailsModel()" style="font-size: 28px; cursor: pointer;" ></i>
+                                </div>
+                                <hr>
+                                <form [formGroup]="editAccountForm" (ngSubmit)="onSubmitEdit()" >
+                                    <div class="d-flex">
+                                        <!--First name-->
+                                        <div class="my-3 me-3 w-50">
+                                            <label for="firstName" class="form-label fw-bold">First Name</label>
+                                            <input type="text" id="firstName" class="form-control" placeholder="Enter your first name to update" formControlName="firstName" />
+                                        </div>
+                                        <!--Last name-->
+                                        <div class="my-3 w-50">
+                                            <label for="lastName" class="form-label fw-bold">Last Name</label>
+                                            <input type="text" id="lastName" class="form-control" placeholder="Enter your last name to update" formControlName="lastName" />
+                                        </div>
+                                    </div>
+                                    <!--Email -->
+                                    <div class="mb-3 position-relative">
+                                        <label for="email" class="form-label fw-bold">Email</label>
+                                        <input type="email" id="email" class="form-control" placeholder="Enter your email address to update" formControlName="email" />
+                                        <i class="bx bxs-envelope position-absolute translate-middle-y end-0 pe-3" style="padding-bottom: 35px ;" ></i>
+                                    </div>
+                                    <!--Phone Number-->
+                                    <div class="my-3 position-relative">
+                                        <label for="phoneNumber" class="form-label fw-bold">Phone number:</label>
+                                        <input type="tel" id="phoneNumber" class="form-control" placeholder="Enter your phone number" formControlName="phoneNumber" >
+                                        <i class='bx bxs-phone-call bx-tada position-absolute translate-middle-y end-0 pe-3' style="padding-bottom: 35px;"></i>
+                                    </div>
+                                    <div class="my-4 d-flex justify-content-between">
+                                        <button class="rounded px-3 py-1" style="border: none; background-color: rgb(217, 185, 124); color: white;" (click)="closeEditAccountDetailsModel()">Cancel</button>
+                                        <button class="rounded px-3 py-1" style="border: none; background-color: rgb(217, 185, 124); color: white;">Update Details</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </ng-container>
+                }
+                @case(tabs[1].id){
+                    <ng-container>
+                        <app-address></app-address>
+                    </ng-container>
+                }
+                @case(tabs[2].id){
+                    <ng-container>
+                        <app-card></app-card>
+                    </ng-container>
+                }
+                @case(tabs[3].id){
+                    <ng-container>
+                        <h4>Forth</h4>
+                    </ng-container>
+                }
+            }
+        </div>
+    </div>
+</div>
