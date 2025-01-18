@@ -1,0 +1,27 @@
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0 10px 30px;
+    background-color: #f5f5f5; 
+    margin: 40px; 
+    border-radius: 10px 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.crop-image {
+  width: 150px; 
+  height: 150px; 
+  object-fit: cover; 
+  border-radius: 100px; 
+  border: 8px solid rgb(242, 232, 232); 
+  box-shadow: -5px 5px 7px rgba(0, 0, 0, 0.9);
+  margin-right: 20px ;
+}
+.crop-details {
+  flex: 1;
+}
+.crop-details h3 {
+  margin: 0 0 5px 0;
+}
+.crop-details p {
+  margin: 3px 0;
+}

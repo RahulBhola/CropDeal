@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-center align-items-center vh-100 rounded shadow-lg" style="background-color: wheat;" >
+  <div class="d-flex align-items-center justify-content-center shadow-lg" style="background-color: white; height: 400px; width: 950px; border-radius: 50px;">
+    <div style="background-color: white; width: 400px;">
+      <h1 class="mb-4">Payment</h1>
+      <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Quantity (Kg)</th>
+            <th scope="col">Price (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="fw-bold">
+            <td>Total</td>
+            <td>{{ totalQuantity }} Kg</td>
+            <td>₹{{ totalPrice }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="p-4 rounded shadow-lg ms-4" style="background-color: aliceblue; width: 400px;">
+      <h3 class="mb-4">Select Payment Method</h3>
+      <div id="card-element" class="mb-3 shadow-lg" style="padding: 30px; font-size: 60px; border-radius: 25px;"></div>
+      <div class="text-center">
+        <button class="btn btn-primary" [disabled]="isProcessing" (click)="makePayment()">
+          {{ isProcessing ? 'Processing...' : 'Pay Now' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

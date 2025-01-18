@@ -1,0 +1,14 @@
+.image{
+  width: 150px; 
+  height: 150px; 
+  object-fit: cover; 
+  border-radius: 100px; 
+  border: 8px solid rgb(242, 232, 232); 
+  box-shadow: -5px 5px 7px rgba(0, 0, 0, 0.9);
+  /* box-shadow: offset-x offset-y blur-radius spread-radius color; */
+  /* offset-x: Horizontal shadow position (positive moves right, negative moves left).
+  offset-y: Vertical shadow position (positive moves down, negative moves up).
+  blur-radius: (Optional) The degree of blur (higher values make it softer).
+  spread-radius: (Optional) Size of the shadow (positive spreads it, negative shrinks it).
+  color: The shadow color (can use any valid CSS color). */
+}

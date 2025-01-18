@@ -1,0 +1,52 @@
+.hero-section {
+    background: linear-gradient(to right, rgba(0, 128, 0, 0.7), rgba(0, 128, 0, 0)), 
+              url('/img/header/headerImg.jpg') center/cover no-repeat;
+    height: 600px;
+}
+.left-hero{
+    padding: 50px 100px 0 200px;
+    width: 62%;
+}
+.left-font {
+    font-size: 30px;
+    font-family: 'Roboto Slab', serif;
+    margin-bottom: 60px;
+}
+.left-middle-font{
+    height: 60px;
+    font-size: 50px;
+    font-family: 'Satisfy', serif;
+    margin-bottom: 170px;
+}
+.typewriter {
+    border-right: 3px solid #fff;
+    padding-right: 5px;
+    font-size: 50px;
+}
+.left-button{
+    width: 300px;
+    padding: 6px 0;
+    border: none;
+}
+.right-hero{
+    padding: 20px;
+    background: linear-gradient(rgba(108, 148, 65, 0.7), rgba(108, 148, 65, 0.7));
+    width: 25%;
+    font: bold;
+}
+.right-image{
+    width: 80px;
+}
+.right-topFont {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+.right-imageText {
+    font-family: "Roboto Slab", serif;
+    margin-top: 4px;
+    font-size: 12px;
+}
+.right-button{
+    width: 200px;
+    border: none;
+}

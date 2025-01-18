@@ -1,0 +1,134 @@
+<div style="padding-bottom: 30px;">
+    <div *ngIf="!hasAddress; else addressExists" class="pb-5" style="background-color: wheat; border-radius: 8px; margin: 40px 80px;">
+        <div class="d-flex align-items-center py-3 mx-5">
+            <h2>Add Address</h2>
+            <!-- <i class='bx bxs-edit bx-tada' style="font-size: 25px; cursor: pointer;" (click)="onEditDetails(viewAddressDetails)"></i> -->
+        </div>
+        <hr>
+        <form [formGroup]="addAddressDetails" (ngSubmit)="onSubmitAddAddress()" style="padding: 0 30px;">
+            <div class="d-flex" >
+                <!--country-->
+                <div class="m-3 w-50">
+                    <label for="country" class="form-label fw-bold" >Country</label>
+                    <input type="text" id="country" class="form-control" placeholder="Enter your country" formControlName="country" />
+                </div>
+                <!--State-->
+                <div class="m-3 w-50">
+                    <label for="state" class="form-label fw-bold" >State</label>
+                    <input type="text" id="state" class="form-control" placeholder="Enter your state" formControlName="state" />
+                </div>
+            </div>
+            <div class="d-flex">
+                <!--District-->
+                <div class="m-3" style="width: 33%;">
+                    <label for="district" class="form-label fw-bold" >District</label>
+                    <input type="text" id="district" class="form-control" placeholder="Enter your district" formControlName="district" />
+                </div>
+                <!--City-->
+                <div class="m-3" style="width: 33%;">
+                    <label for="city" class="form-label fw-bold" >City</label>
+                    <input type="text" id="city" class="form-control" placeholder="Enter your city" formControlName="city" />
+                </div>
+                <!--Pincode-->
+                <div class="m-3" style="width: 33%;">
+                    <label for="pincode" class="form-label fw-bold" >Pincode</label>
+                    <input type="number" id="pincode" class="form-control" placeholder="Enter your pincode" formControlName="pincode" />
+                </div>
+            </div>
+            <!--Landmark-->
+            <div class="m-3">
+                <label for="landmark" class="form-label fw-bold" >Landmark</label>
+                <input type="text" id="landmark" class="form-control" placeholder="Enter your landmark" formControlName="landmark" />
+            </div>
+            <div class="mx-3 d-flex justify-content-end">
+                <button class="rounded px-3 py-2 mt-4" style="border: none; background-color: rgb(217, 185, 124); color: white;">Add Details</button>
+            </div>
+        </form>
+    </div>
+    <ng-template #addressExists>
+        <div style="background-color: wheat; border-radius: 8px; margin: 40px 80px;">
+            <div class="d-flex justify-content-between align-items-center py-3 mx-5">
+                <h2>View Address</h2>
+                <div>
+                    <i class='bx bxs-edit bx-tada pe-3' style="font-size: 30px; cursor: pointer;" (click)="onEditDetails(viewAddressDetails)"></i>
+                    <i class='bx bxs-trash bx-tada' style="font-size: 30px; cursor: pointer;" (click)="onDelete(viewAddressDetails)"></i>
+                </div>
+            </div>
+            <hr>
+            <div style="margin: 0 50px;" >
+                <div class="d-flex justify-content-between pb-2">
+                    <div>Country</div>
+                    <div>{{viewAddressDetails.country}}</div>
+                </div>
+                <div class="d-flex justify-content-between pb-2">
+                    <div>State</div>
+                    <div>{{viewAddressDetails.state}}</div>
+                </div>
+                <div class="d-flex justify-content-between pb-2">
+                    <div>District</div>
+                    <div>{{viewAddressDetails.district}}</div>
+                </div>
+                <div class="d-flex justify-content-between pb-2">
+                    <div>City</div>
+                    <div>{{viewAddressDetails.city}}</div>
+                </div>
+                <div class="d-flex justify-content-between pb-2">
+                    <div>Zip Code</div>
+                    <div>{{viewAddressDetails.pinCode}}</div>
+                </div>
+                <div class="d-flex justify-content-between pb-5">
+                    <div>Landmark</div>
+                    <div>{{viewAddressDetails.landMark}}</div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="showEditAddressModel" class="modal-overlay position-fixed top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center zindex-1050" (click)="closeAddressModel()">
+            <div class="modal-container px-5 pt-4 rounded shadow-sm" (click)="stopPropagation($event)">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 class="m-1 fw-bold">Edit Address Details</h2>
+                    <i class="bx bx-cut bx-burst bx-flip-horizontal fw-bold" (click)="closeAddressModel()" style="font-size: 28px; cursor: pointer;" ></i>
+                </div>
+                <hr>
+                <form [formGroup]="editAddressModel" (ngSubmit)="onUpdateAddress()" >
+                    <div class="d-flex" >
+                        <!--country-->
+                        <div class="m-3 w-50">
+                            <label for="country1" class="form-label fw-bold" >Country</label>
+                            <input type="text" id="country1" class="form-control" placeholder="Enter your country" formControlName="country1" />
+                        </div>
+                        <!--State-->
+                        <div class="m-3 w-50">
+                            <label for="state1" class="form-label fw-bold" >State</label>
+                            <input type="text" id="state1" class="form-control" placeholder="Enter your state" formControlName="state1" />
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <!--District-->
+                        <div class="m-3" style="width: 33%;">
+                            <label for="district1" class="form-label fw-bold" >District</label>
+                            <input type="text" id="district1" class="form-control" placeholder="Enter your district" formControlName="district1" />
+                        </div>
+                        <!--City-->
+                        <div class="m-3" style="width: 33%;">
+                            <label for="city1" class="form-label fw-bold" >City</label>
+                            <input type="text" id="city1" class="form-control" placeholder="Enter your city" formControlName="city1" />
+                        </div>
+                        <!--Pincode-->
+                        <div class="m-3" style="width: 33%;">
+                            <label for="pincode1" class="form-label fw-bold" >Pincode</label>
+                            <input type="number" id="pincode1" class="form-control" placeholder="Enter your pincode" formControlName="pincode1" />
+                        </div>
+                    </div>
+                    <!--Landmark-->
+                    <div class="m-3">
+                        <label for="landmark1" class="form-label fw-bold" >Landmark</label>
+                        <input type="text" id="landmark1" class="form-control" placeholder="Enter your landmark" formControlName="landmark1" />
+                    </div>
+                    <div class="mx-3 d-flex justify-content-end">
+                        <button class="rounded px-3 py-2 mt-4" style="border: none; background-color: rgb(217, 185, 124); color: white;">Add Details</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ng-template>
+</div>

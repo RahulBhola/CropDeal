@@ -1,0 +1,62 @@
+<div style="background-color: wheat;">
+  <div
+    style="background: radial-gradient(circle at center, rgba(39, 75, 21, 0.95) 0%, rgba(99, 121, 55, 0.85) 50%, rgba(108, 189, 53, 0.8) 100%); height: 220px; border-radius: 0 0 50px 50px;">
+    <div class="text-center pt-5 text-white">
+      <h4>View Users</h4>
+      <h1 class="fw-bold" style="font-family: 'Roboto Slab', serif;">View All Users</h1>
+    </div>
+  </div>
+  <div class="py-5" style="margin: 0 190px;">
+    <div class="d-flex justify-content-evenly">
+      <!-- Dropdown for filtering users by role -->
+      <div class="mb-4" style="width: 45%;">
+        <label for="roleFilter" class="form-label fw-bold">Filter by Role:</label>
+        <select id="roleFilter" class="form-select" [(ngModel)]="selectedRole" (change)="applyFilters()">
+          <option value="">All Roles</option>
+          <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+        </select>
+      </div>
+
+      <!-- Dropdown for filtering users by status -->
+      <div class="mb-4" style="width: 45%;">
+        <label for="statusFilter" class="form-label fw-bold">Filter by Status:</label>
+        <select id="statusFilter" class="form-select" [(ngModel)]="selectedStatus" (change)="applyFilters()">
+          <option value="">All Statuses</option>
+          <option *ngFor="let sts of status" [value]="sts">{{ sts }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- User list -->
+    <div *ngFor="let user of filteredUsers" class="d-flex mb-3"
+      style="border: 1px solid #ddd; border-radius: 10px; padding: 10px; background-color: white;">
+      <div class="d-flex align-items-center">
+        <img class="mx-4" *ngIf="user.userType === 'Farmer'" src="/img/navbar/farmer-logo.jpg"
+          style="height: 100px; width: 100px;" />
+        <img class="mx-4" *ngIf="user.userType === 'Dealer'" src="/img/navbar/dealer-logo.jpg"
+          style="height: 100px; width: 100px; border-radius: 35px;" />
+      </div>
+      <div style="width: 70%;">
+        <h5 class="text-uppercase" style="color: #1b5e20; margin-bottom: 10px;">
+          {{ user.firstName | titlecase }} {{ user.lastName | titlecase }}
+        </h5>
+        <p>Email: {{ user.email }}</p>
+        <p>Role: {{ user.userType }}</p>
+        <p>
+          <span [class]="user.isActive ? 'status-dot-active' : 'status-dot-inactive'"></span>
+          Status: {{ user.isActive ? 'Active' : 'Inactive' }}
+        </p>
+      </div>
+      <div class="d-flex align-items-center">
+        <div class="d-flex justify-content-end">
+          <div class="text-white fw-bold"
+            [style.background-color]="user.isActive ? 'red' : 'green'"
+            (click)="toggleStatus(user)"
+            style="padding: 8px 12px; cursor: pointer;">
+            {{ user.isActive ? 'Deactivate' : 'Activate' }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CartService {
+
+  private cartCount = new BehaviorSubject<number>(0); // Observable for cart count
+  currentCartCount = this.cartCount.asObservable();  // Expose as observable
+
+  constructor() {}
+
+  // Update the cart count
+  updateCartCount(count: number) {
+    this.cartCount.next(count);
+  }
+
+  // Increment cart count
+  incrementCartCount() {
+    this.cartCount.next(this.cartCount.value + 1);
+  }
+
+  // Decrement cart count
+  decrementCartCount() {
+    this.cartCount.next(this.cartCount.value - 1);
+  }
+}

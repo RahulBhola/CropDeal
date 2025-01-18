@@ -1,0 +1,25 @@
+<div class="invoice-container">
+    <h2 class="text-center fw-bold text-white">User Invoices</h2>
+  
+    <div *ngFor="let invoiceData of invoices" class="invoice">
+        <div class="d-flex justify-content-between">
+            <h3>Invoice ID: {{ invoiceData.invoice.invoiceId }}</h3>
+            <div class="d-flex">
+                <h6 class="me-2" style="cursor: pointer; background-color: white; padding: 10px; border-radius: 25px;" (click)="navigate(invoiceData.invoice.invoiceId)">Show More</h6>
+                <h6 style="cursor: pointer; background-color: white; padding: 4px; border-radius: 25px; font-size: 25px;" (click)="toggleDetails(invoiceData)">
+                    <i class='bx bx-chevron-down bx-tada' ></i>
+                </h6>
+            </div>
+        </div>
+        <div *ngIf="invoiceData.showDetails">
+            <hr>
+            <p><strong>Billing To:</strong> {{ invoiceData.invoice.billingTo }}</p>
+            <p><strong>Order Date:</strong> {{ invoiceData.invoice.orderDate | date:'medium' }}</p>
+            <p><strong>Delivery Date:</strong> {{ invoiceData.invoice.deliveryDate | date:'medium' }}</p>
+            <p><strong>Delivery Address:</strong> {{ invoiceData.invoice.deliveryAddress }}</p>
+            <p><strong>Order Quantity:</strong> {{ invoiceData.orderQuantity }}</p>
+            <p><strong>Total Price:</strong> ₹{{ invoiceData.totalPrice }}</p>
+            <p><strong>Order Transaction Status:</strong> {{ invoiceData.orderTransactionStatus ? 'Completed' : 'Pending' }}</p>
+        </div>
+    </div>
+</div>  

@@ -1,0 +1,146 @@
+<div style="background-color: wheat;">
+  <div style="background: radial-gradient(circle at center,rgba(39, 75, 21, 0.95) 0%, rgba(99, 121, 55, 0.85) 50%, rgba(108, 189, 53, 0.8) 100%); height: 220px; border-radius: 0 0 50px 50px;">
+    <div class="text-center pt-5 text-white">
+      <h4>New Crop</h4>
+      <h1 class="fw-bold" style="font-family: 'Roboto Slab', serif;">Add New Crop to Sell</h1>
+    </div>
+  </div>
+  <form [formGroup]="addFarmerDetails" (ngSubmit)="onSavingCropDetails()"> 
+    <div class="d-flex align-items-center justify-content-center">
+      <div class="d-flex justify-content-end" style="width: 72%; margin: 12px 0;">
+        <button type="button" class="me-4" style="border: none; padding: 6px 18px; border-radius: 12px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" (click)="onClickCancel()" >Cancel</button>
+        <button type="submit" style="border: none; padding: 6px 18px; border-radius: 12px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">Add Crop</button>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div style="width: 20%;">
+        <div class="card p-4" style="border-radius: 25px; box-shadow: inset 0 -1em 3em rgb(0 200 0 / 30%), 0 0 0 2px white, 0.3em 0.3em 1em rgb(200 0 0 / 60%);" >
+          <h5>Thumbnail</h5>
+          <!-- Image Upload Section -->
+          <div class="d-flex justify-content-center align-items-center border mt-3" style="border-radius: 25px; height: 150px; position: relative;">
+            <!-- Image Preview -->
+            <img id="imagePreview" class="img-fluid" style="border-radius: 25px; display: none;" alt="Preview" />
+            <!-- Upload Button -->
+            <!-- *ngIf="!imageUrl"  -->
+            <label for="uploadImage" class="d-flex flex-column align-items-center justify-content-center" style="position: absolute; cursor: pointer; text-align: center;">
+              <i class="bx bx-upload add-icon" style="font-size: 40px; color: #777;"></i>
+              <span class="text-muted">Click to upload</span>
+            </label>
+            <!-- File Input -->
+            <input type="file" id="uploadImage" accept="image/*" (change)="onImageSelected($event)" formControlName="image" style="border-radius: 25px; display: none;" />
+            
+            <!-- Display the preview of the selected image -->
+            <div *ngIf="previewImageUrl">
+              <img [src]="previewImageUrl" alt="Image Preview" style="border-radius: 25px; width: 250px; height: 150px;" />
+            </div>
+
+          </div>
+          <div class="error-feedback mt-1" *ngIf="hasDisplayableError('image')">
+            <div *ngIf="addFarmerDetails.controls['image'].hasError('required')">
+              Image is required.
+            </div>
+          </div>
+          <small class="text-muted mt-3">
+            Set the product thumbnail image. Only *.png, *.jpg, and *.jpeg image files are accepted.
+          </small>
+        </div>
+
+        <div class="card p-4 mt-3" style="border-radius: 25px;  box-shadow: inset 0 -1em 3em rgb(0 200 0 / 30%), 0 0 0 3px white, 0.3em 0.3em 1em rgb(200 0 0 / 60%);">
+          <!-- Type -->
+          <h5 class="mb-0">Crop Type</h5>
+          <hr class="text-muted" />
+          <!-- Type Dropdown -->
+          <label for="status-select" class="form-label">Choose Crop Type</label>
+          <select id="status-select" class="form-select" formControlName="cropType">
+            <option value="" selected>Select Crop Type</option>
+            <option value="wheat">Wheat</option>
+            <option value="rice">Rice</option>
+            <option value="corn">Corn</option>
+            <option value="tomato">Tomato</option>
+          </select>
+          <!-- Error Feedback for Crop Type -->
+          <div class="error-feedback mt-1" *ngIf="hasDisplayableError('cropType')">
+            <div *ngIf="addFarmerDetails.controls['cropType'].hasError('required')">
+              Crop Type is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width: 53%;">
+        <div class="card p-4 ms-4" style="border-radius: 25px;  box-shadow: inset 0 -1em 3em rgb(0 200 0 / 30%), 0 0 0 2px white, 0.3em 0.3em 1em rgb(200 0 0 / 60%);">
+          <h5 class="mb-1">General</h5>
+          <hr class="text-muted" />
+          <!-- Crop Name -->
+          <div class="mb-3">
+            <label for="productName" class="form-label">Crop Name</label>
+            <input type="text" class="form-control" placeholder="Enter crop name" formControlName="cropName" />
+          </div>
+          <div class="error-feedback" *ngIf="hasDisplayableError('cropName')">
+            <div *ngIf="addFarmerDetails.controls['cropName'].hasError('required')">
+              Crop Name is required.
+            </div>
+            <div *ngIf="addFarmerDetails.controls['cropName'].hasError('minlength') && !addFarmerDetails.controls['cropName'].hasError('required')">
+              Crop Name must be at least 3 characters.
+            </div>
+            <div *ngIf="addFarmerDetails.controls['cropName'].hasError('pattern')  && !addFarmerDetails.controls['cropName'].hasError('minlength')">
+              Crop Name can only contain letters (no numbers or special characters).
+            </div>
+          </div>
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label ">Description</label>
+            <textarea class="form-control" rows="4" placeholder="Write a description..." formControlName="description" ></textarea>
+            <small class="text-muted">Set a description to the product for better visibility.</small>
+          </div>
+          <div class="error-feedback" *ngIf="hasDisplayableError('description')">
+            <div *ngIf="addFarmerDetails.controls['description'].hasError('required')">
+              Crop Description is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-4 ms-4 mb-5 mt-3" style="border-radius: 25px; box-shadow: inset 0 -1em 3em rgb(0 200 0 / 30%), 0 0 0 2px white, 0.3em 0.3em 1em rgb(200 0 0 / 60%);">
+          <!-- Pricing -->
+          <h5 class="mb-0">Pricing</h5>
+          <hr class="text-muted" />
+          <!-- Quantity -->
+          <div class="mb-3">
+            <label for="cropQuantity" class="form-label">Crop Quantity</label>
+            <input type="text" id="cropQuantity" class="form-control" placeholder="Enter crop quantity" formControlName="cropQuantity" />
+          </div>
+          <div class="error-feedback" *ngIf="hasDisplayableError('cropQuantity')">
+            <div *ngIf="addFarmerDetails.controls['cropQuantity'].hasError('required')">
+              Crop Quantity is required.
+            </div>
+            <div *ngIf="addFarmerDetails.controls['cropQuantity'].hasError('pattern')" >
+              Crop Quantity can only contain numbers (no character or special characters).
+            </div>
+          </div>
+          <!-- Crop Price Per Kg -->
+          <div class="mb-3">
+            <label for="cropPricePerKg" class="form-label">Crop Price Per Kg</label>
+            <input
+              type="text"
+              id="cropPricePerKg"
+              class="form-control"
+              placeholder="Enter crop price per kg"
+              formControlName="cropPricePerKg"
+            />
+          </div>
+
+          <!-- Error Feedback for Crop Price Per Kg -->
+          <div class="error-feedback" *ngIf="hasDisplayableError('cropPricePerKg')">
+            <div *ngIf="addFarmerDetails.controls['cropPricePerKg'].hasError('required')">
+              Crop Price Per Kg is required.
+            </div>
+            <div *ngIf="addFarmerDetails.controls['cropPricePerKg'].hasError('pattern')">
+              Crop Price Per Kg can only contain numbers with up to 2 decimal places.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,18 @@
+.status-dot-active {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background-color: green;
+  }
+  
+  .status-dot-inactive {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background-color: red;
+  }
+  

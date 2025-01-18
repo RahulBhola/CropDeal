@@ -1,0 +1,58 @@
+<div style="height: 400px;">
+    <div class="flip-container" [ngClass]="{ 'is-flipped': isFlipped }">
+        <div class="flip-card">
+            <!-- Front Side -->
+            <div class="flip-card-front">
+                <div class="card">
+                    <div class="card-top ps-5">
+                        <p class="card_bank-name">ADD YOUR BANK DETAILS NOW</p>
+                        <p class="card_type">Debit Card</p>
+                    </div>
+                    <p class="card-number">
+                        **** **** **** 
+                        {{ viewBankDetails.accountNumber ? viewBankDetails.accountNumber.toString().slice(-4) : '****' }}
+                    </p>                                      
+                    <div class="card-bottom">
+                        <p class="card_user-logo fw-bold ps-5">Card Holder Name</p>
+                        <i class='bx bx-edit-alt text-white me-5 mt-1' style="font-size: 35px; cursor: pointer;"  (click)="onEdit(viewBankDetails)"></i>
+                    </div>
+                    <div class="card_watermark">Add Bank Account</div>
+                </div>
+            </div>
+    
+            <!-- Back Side -->
+            <div class="flip-card-back">
+                <form class="card" [formGroup]="addBankAccount" >
+                    <div style="padding: 0 22px; margin: 22px;">
+                        <div class="mb-2">
+                            <label for="accountNumber" class="form-label text-white">Account Number</label>
+                            <input type="number" id="accountNumber" class="form-control" placeholder="Enter account number" formControlName="accountNumber" />
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="mb-2">
+                                <label for="ifsc" class="form-label text-white">IFSC Code</label>
+                                <input type="text" id="ifsc" class="form-control" placeholder="Enter IFSC Code" formControlName="ifsc" />
+                            </div>
+                            <div class="mb-2 w-50">
+                                <label for="bankName" class="form-label text-white">Bank Name</label>
+                                <input type="text" id="bankName" class="form-control" placeholder="Enter Bank Name" formControlName="bankName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between pe-5">
+                        <i class='bx bx-arrow-back text-white ms-5 mt-2' style="font-size: 35px; cursor: pointer;" (click)="goBack()"></i>
+                        <i class='bx bx-trash fw-bold text-white ms-5 mt-2' style="font-size: 35px; cursor: pointer;" (click)="onDelete(viewBankDetails)" ></i>
+                        <button class="d-flex align-items-center px-4 py-1 mb-2" style="border: none; border-radius: 25px;" (click)="onSubmit()">
+                          <i style="font-size: 35px; cursor: pointer;" class='bx bx-check-double bx-tada mb-2'></i>
+                          <div class="fw-bold">Save Details</div>
+                        </button>
+                        <button *ngIf="isEditMode" class="d-flex align-items-center px-4 py-1 mb-2" style="border: none; border-radius: 25px;" (click)="onUpdate()">
+                          <i style="font-size: 35px; cursor: pointer;" class='bx bx-save bx-tada mb-2'></i>
+                          <div class="fw-bold">Update Details</div>
+                        </button>
+                      </div>                                      
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+<!-- <i (click)="downloadPDF()" class="bx bxs-download d-flex justify-content-center" style="font-size: 23px; cursor: pointer;"></i> -->
+<div class="d-flex justify-content-center">
+  <button style="border: none; padding: 5px 15px;  border-radius: 25px;" printSectionId="print-section" ngxPrint >Print</button>
+</div>
+<div class="d-flex justify-content-center">
+  <div style="width: 60%;">
+    <section id="print-section">
+      <div style="padding: 40px; height: auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin: 20px auto;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center;">
+                <img src="/img/navbar/logo.png" alt="CropDeal Logo" style="width: 120px; height: 90px;" />
+                <p class="fw-bold" style="font-family: 'Roboto Slab'; font-size: 42px; color: #5a7931; margin-left: 10px;">CropDeal</p>
+            </div>
+            <div>
+              <h1 style="margin-top: 22px; font-family: 'Roboto Slab'; font-size: 42px; color: #5a7931;">INVOICE</h1>
+            </div>
+          </div>
+          <div  style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            <div style="flex: 1;">
+              <div style="font-weight: bold; font-weight: 700; font-size: 16px; text-transform: uppercase; margin-bottom: 10px;">
+                <p>Invoice From</p>
+              </div>
+              <div style="margin-bottom: 10px; font-weight: 700; font-size: 14px;">
+                <p>{{dealerInfo.invoice.billingTo}}</p>
+                <span style="font-weight: 400; font-size: 12px;">Dealer</span>
+              </div>
+              <div style="margin-bottom: 10px; font-weight: 700; font-size: 14px;">
+                <p>{{dealerInfo.invoice.deliveryAddress}}</p>
+              </div>
+            </div>
+            <div class="i_details text_right" style="flex: 1; text-align: right;">
+              <div style="font-weight:  bold; font-weight: 700; font-size: 16px; text-transform: uppercase; margin-bottom: 10px;">
+                <p>Invoice details</p>
+              </div>
+              <div style="margin-bottom: 10px; font-weight: 700; font-size: 14px;">
+                <p>Invoice No:</p>
+                <span style="font-weight: 400; font-size: 12px;">{{dealerInfo.orderTransactionId-1}}</span>
+              </div>
+              <div style="margin-bottom: 10px; font-weight: 700; font-size: 14px;">
+                <p>Invoice Date & Time:</p>
+                <span style="font-weight: 400; font-size: 12px;">{{dealerInfo.orderDate | date:'medium'}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="i_row" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            <div class="i_payment" style="flex: 1;">
+              <div style="font-weight: bold; font-weight: 700; font-size: 16px; text-transform: uppercase; margin-bottom: 10px;">
+                <p>Payment Method</p>
+              </div>
+              <div style="margin-bottom: 10px; font-weight: 700; font-size: 14px;">
+                <p>Card Payment:</p>
+                <span style="font-weight: 400; font-size: 12px;">Visa, MasterCard, Paypal</span>
+                <p>Bank:</p>
+                <span style="font-weight: 400; font-size: 12px;">{{dealerInfo.bankAccount.bankName}}</span>
+              </div>
+            </div>
+            <div class="i_duetotal text_right" style="flex: 1; text-align: right;">
+              <div style="font-weight: bold; font-weight: 700; font-size: 16px; text-transform: uppercase; margin-bottom: 10px;">
+                <p>Total Due</p>
+              </div>
+              <div style="margin-bottom: 10px; font-weight: 700; font-size: 14px;">
+                <p>Amount In Rupees:</p>
+                <span style="font-weight: 400; font-size: 12px;">Rs {{dealerInfo.totalPrice}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div style="border-bottom: 1px solid #000; margin-bottom: 10px; background-color: rgb(186, 186, 240); padding: 10px 0;">
+              <div class="i_row" style="display: flex; justify-content: space-between;">
+                <div class="i_col w_15" style="flex: 0 0 8%;">SNo.</div>
+                <div class="i_col w_15" style="flex: 0 0 16%;">IMAGE</div>
+                <div class="i_col w_55" style="flex: 0 0 57%;">DESCRIPTION</div>
+                <div class="i_col w_15" style="flex: 0 0 15%;">PRICE</div>
+              </div>
+            </div>
+            <div class="i_table_body">
+              <div *ngFor="let crop of dealerInfo.crops; let i = index" class="i_row" style="display: flex; justify-content: space-between; margin-bottom: 10px; padding: 20px 0;">
+                <div style="flex: 0 0 1%;">{{i + 1}}</div>
+                <img [src]="'data:image/jpeg;base64,' + crop.imageData" alt="Crop Image" style="width: 60px; height: 60px; object-fit: cover; border-radius: 100px; border: 2px solid rgb(242, 232, 232); box-shadow: -5px 5px 7px rgba(0, 0, 0, 0.9);" />
+                <div style="flex: 0 0 49%;">{{crop.cropName}} - {{crop.description}}</div>
+                <div style="flex: 0 0 15%;">Rs {{crop.pricePerKg}}</div>
+              </div>
+            </div>
+            <div style="margin-top: 10px; border-top: 1px solid #000; background-color: rgb(186, 186, 240); padding: 10px 0;">
+              <div style="display: flex; justify-content: space-between;">
+                <div style="flex: 0 0 10%;">Sub Total</div>
+                <div>Total Quantity - {{dealerInfo.orderQuantity}}</div>
+                <div style="text-align: end; padding-right: 65px;">Rs {{dealerInfo.totalPrice}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 20px;">
+          <div style="font-weight: bold;">
+            <p>Terms and Conditions</p>
+          </div>
+          <p>
+            1. <strong>Payment Terms</strong>: All payments are to be made in full before delivery, unless otherwise agreed. Accepted payment methods include Visa, MasterCard, and PayPal. Bank transfers are also accepted, with details provided in the invoice.
+          </p>
+          <p>
+            2. <strong>Product Delivery</strong>: The delivery of crops is subject to availability and may take up to 7-10 business days from the date of payment confirmation. Delivery times may vary depending on location and other factors.
+          </p>
+          <p>
+            3. <strong>Pricing</strong>: All prices listed are in the local currency (INR or USD) and are subject to change without prior notice. The total price is inclusive of applicable taxes unless specified otherwise.
+          </p>
+          <p>
+            4. <strong>Product Quality and Returns</strong>: We strive to provide high-quality crops. If you experience any issues with the products, please notify us within 3 days of receiving the goods. Returns or exchanges will only be processed if the crops are damaged upon delivery or if there are discrepancies in the order.
+          </p>
+          <p>
+            5. <strong>Liability</strong>: We are not responsible for any delays or damage that occurs during delivery, including but not limited to, delays caused by weather conditions, third-party carriers, or other unforeseeable events.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,152 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    <!-- Logo -->
+    <div class="d-flex align-items-center">
+      <img src="/img/navbar/logo.png" alt="CropDeal Logo" style="width: 120px; height: 90px; margin-left: 75px;" />
+      <p class="fw-bold ms-3" style="font-family: 'Roboto Slab'; font-size: 42px; color: #5a7931;">CropDeal</p>
+    </div>
+
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto text-uppercase fw-bold"
+        style="font-family: 'Poppins', sans-serif; font-size: 20px; color: #5a7931;">
+        <!-- Home -->
+        <li class="nav-item mx-2 py-3">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+
+        <!-- About Us -->
+        <li class="nav-item mx-2 py-3">
+          <a class="nav-link" routerLink="/about-us">About Us</a>
+        </li>
+
+        <!-- Login -->
+        <ng-container *ngIf="userRole !== 'Dealer' && userRole !== 'Farmer' && userRole !== 'Admin'">
+          <li class="nav-item mx-2 py-3">
+            <a class="nav-link" routerLink="/login">Login</a>
+          </li>
+        </ng-container>
+
+        <!-- Farmer Links -->
+        <ng-container *ngIf="userRole === 'Farmer'">
+          <li class="nav-item mx-2 py-3">
+            <a class="nav-link" routerLink="/view-crop">Crops Added</a>
+          </li>
+          <li class="nav-item mx-2 py-3">
+            <a class="nav-link" routerLink="/farmer">Sell Crop</a>
+          </li>
+        </ng-container>
+
+        <!-- Dealer Links -->
+        <ng-container *ngIf="userRole === 'Dealer'">
+          <li class="nav-item mx-2 py-3">
+            <a class="nav-link" routerLink="/dealer">Buy Crop</a>
+          </li>
+          <li>
+            <i routerLink="/cart" class='bx bxs-cart bx-tada mt-3' style="font-size: 35px; cursor: pointer;"></i>
+            <span *ngIf="cartCount > 0" class="badge bg-danger position-absolute">
+              {{ cartCount }}
+            </span>
+          </li>
+        </ng-container>
+
+        <!-- Profile and Logout for dealer and farmer -->
+        <ng-container *ngIf="userRole === 'Dealer' || userRole === 'Farmer' ">
+          <li class="nav-item mx-3 dropdown-container" style="cursor: pointer; position: relative;">
+            <img *ngIf="userRole === 'Farmer' " src="/img/navbar/farmer-logo.jpg" style="height: 70px;" (click)="toggleDropdown()" />
+            <img *ngIf="userRole === 'Dealer'" src="/img/navbar/dealer-logo.jpg" style="height: 65px; border-radius: 25px; margin-left: 12px;" (click)="toggleDropdown()" />
+            <ul class="dropdown-menu" [ngClass]="{ 'show': isDropdownVisible }"
+              style="position: absolute; top: 100%; right: 0; background: white; list-style: none; padding: 10px; border: 1px solid #ddd; z-index: 1000;">
+              <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+            </ul>
+          </li>
+        </ng-container>
+        <!-- Profile and Logout for admin -->
+        <ng-container *ngIf="userRole === 'Admin' ">
+          <li class="nav-item mx-3 py-4" style="cursor: default;">Welcome, Admin</li>
+          <li class="nav-item mx-3 dropdown-container" style="cursor: pointer; position: relative;">
+            <!-- <img src="/img/navbar/user.png" style="height: 80px;" (click)="toggleDropdown()" /> -->
+            <div
+              class="my-2"
+              (click)="toggleDropdown()"
+              style="background-color: #1f293a; color: white; height: 60px; width: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold;">
+              Admin
+            </div>
+            <ul class="dropdown-menu" [ngClass]="{ 'show': isDropdownVisible }"
+              style="position: absolute; top: 100%; right: 0; background: white; list-style: none; padding: 10px; border: 1px solid #ddd; z-index: 1000;">
+              <li><a class="dropdown-item" routerLink="/user-management">User Management</a></li>
+              <li><a class="dropdown-item" routerLink="/crop-management">Crop Management</a></li>
+              <li><a class="dropdown-item" routerLink="/invoice-management">Invoice Management</a></li>
+              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+            </ul>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Display Router Outlet -->
+<router-outlet></router-outlet>
+
+<!-- Footer -->
+<footer class="text-center" style="background-color: white; font-family: 'Roboto Slab', serif;">
+  <section class="" style="margin: 0 130px;">
+    <div class="container text-center text-md-start pt-5">
+      <!-- Grid row -->
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-3 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <div class="d-flex align-items-center mb-4">
+            <img src="/img/navbar/logo.png" alt="CropDeal Logo" style="width: 100px; height: 70px;" />
+            <p class="fw-bold" style="font-family: 'Roboto Slab'; font-size: 32px; color: #5a7931;">CropDeal</p>
+          </div>
+          <p>
+            A B2B DIGITAL marketplace where fair food trade is made easy, fast, and transparent!
+          </p>
+        </div>
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold">Useful links</h6>
+          <hr
+              class="mb-4 mt-0 d-inline-block mx-auto"
+              style="width: 60px; background-color: #7c4dff; height: 2px"
+              />
+          <p>
+            <a [routerLink]="[ '/about-us' ]" class="text-dark">About Us</a>
+          </p>
+          <p>
+            <a *ngIf="userRole === 'Farmer' || userRole === 'Dealer'" href="/user-invoice" class="text-dark">View Invoices</a>
+            <a *ngIf="userRole === 'Admin'" [routerLink]="[ '/invoice-management' ]" class="text-dark">View Invoices</a>
+          </p>
+          <p>
+            <a href="/home" class="text-dark">Help</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold">Contact</h6>
+          <hr
+              class="mb-4 mt-0 d-inline-block mx-auto"
+              style="width: 60px; background-color: #7c4dff; height: 2px"
+              />
+          <p><i class="fas fa-home mr-3"></i>Location: Mumbai, Maharastra</p>
+          <p><i class="fas fa-envelope mr-3"></i>Email: rahulbhola&#64;gmail.com</p>
+          <p><i class="fas fa-phone mr-3"></i>Contact: + 01 234 567 88</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4 text-white" style="background-color:  rgba(5, 141, 5, 0.7);" >© 2024. All rights reserved by Rahul Bhola.</div>
+</footer>

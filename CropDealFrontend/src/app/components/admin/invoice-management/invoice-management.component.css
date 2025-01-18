@@ -1,0 +1,56 @@
+.invoice-container {
+    padding: 20px;
+  }
+  
+  .invoice {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 32px 32px;
+    padding: 30px 80px;
+    background-color: wheat;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+  }
+  
+  h3 {
+    color: #333;
+  }
+  
+  p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  strong {
+    color: #555;
+  }
+  
+
+  .search-container {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .input-container {
+    position: relative;
+    display: inline-block;
+    width: 50%;
+  }
+  
+  .input-container i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ccc;
+    font-size: 25px;
+  }
+  
+  .input-container .form-control {
+    width: 100%;
+    padding: 10px 10px 10px 40px; /* Extra left padding for the icon */
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  

@@ -1,0 +1,21 @@
+/* Original CSS */
+li.active {
+    background-color: green;
+    border-radius: 25px;
+    color: wheat;
+}
+.modal-overlay {
+    background: rgba(0, 0, 0, 0.8); 
+}
+
+.modal-container {
+    height: 60%;
+    /* background-color: rgb(61, 92, 61); */
+    background-color: white;
+    max-width: 700px;
+    width: 100%;
+}
+
+.modal-container h2 {
+    margin-bottom: 20px;
+}

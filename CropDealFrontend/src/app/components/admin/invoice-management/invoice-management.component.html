@@ -1,0 +1,53 @@
+<div style="background: radial-gradient(circle at center,rgba(39, 75, 21, 0.95) 0%, rgba(99, 121, 55, 0.85) 50%, rgba(108, 189, 53, 0.8) 100%); height: 220px; border-radius: 0 0 50px 50px;">
+    <div class="text-center pt-5 text-white">
+        <h4>View Invoices</h4>
+        <h1 class="fw-bold" style="font-family: 'Roboto Slab', serif;">User Invoices</h1>
+    </div>
+</div>
+<div class="search-container" style="text-align: center; margin: 20px;">
+    <div class="input-container">
+      <i class="bx bx-search-alt "></i>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by Invoice ID"
+        [(ngModel)]="searchTerm"
+        (input)="searchInvoices()"
+      />
+    </div>
+</div>
+  
+<div class="invoice-container" style="margin: 0 190px;">
+    <div *ngFor="let invoiceData of filteredInvoices" class="invoice">
+        <div class="d-flex justify-content-between">
+            <h3>Invoice ID: {{ invoiceData.invoiceId }}</h3>
+            <div class="d-flex">
+                <h6 class="me-2" style="cursor: pointer; background-color: white; padding: 10px; border-radius: 25px;" (click)="navigate(invoiceData.invoiceId)">Show More</h6>
+                <h6 style="cursor: pointer; background-color: white; padding: 4px; border-radius: 25px; font-size: 25px;" (click)="toggleDetails(invoiceData)">
+                    <i class='bx bx-chevron-down bx-tada' ></i>
+                </h6>
+            </div>
+        </div>
+        <!-- <p><strong>Billing To:</strong> {{ invoiceData.billingTo }}</p>
+        <p><strong>Order Date & Time:</strong> {{ invoiceData.orderDate | date:'medium' }}</p>
+        <p><strong>Delivery Date & Time:</strong> {{ invoiceData.deliveryDate | date:'medium' }}</p>
+        <p><strong>Delivery Address:</strong> {{ invoiceData.deliveryAddress }}</p> -->
+
+
+        <!-- <p><strong>Order Quantity:</strong> {{ invoiceData.orderQuantity }}</p>
+        <p><strong>Total Price:</strong> ₹{{ invoiceData.totalPrice }}</p>
+        <p><strong>Order Transaction Status:</strong> {{ invoiceData.orderTransactionStatus ? 'Completed' : 'Pending' }}</p> -->
+        <!-- Additional details to toggle -->
+        <div *ngIf="invoiceData.showDetails">
+            <hr>
+            <p><strong>Billing To:</strong> {{ invoiceData.billingTo }}</p>
+            <p><strong>Order Date & Time:</strong> {{ invoiceData.orderDate | date:'medium' }}</p>
+            <p><strong>Delivery Date & Time:</strong> {{ invoiceData.deliveryDate | date:'medium' }}</p>
+            <p><strong>Delivery Address:</strong> {{ invoiceData.deliveryAddress }}</p>
+            <!-- Include other details you want to toggle -->
+            <!-- <p><strong>Order Quantity:</strong> {{ invoiceData.orderQuantity }}</p>
+            <p><strong>Total Price:</strong> ₹{{ invoiceData.totalPrice }}</p>
+            <p><strong>Order Transaction Status:</strong> {{ invoiceData.orderTransactionStatus ? 'Completed' : 'Pending' }}</p> -->
+        </div>
+    </div>
+</div>  
