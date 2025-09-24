@@ -24,3 +24,5 @@ This is a CropDealing website with three users i.e
    4.1 Identity Services - Authentication and Authorization using Jwt Token, Stored in the form of cookies
    4.2 Email Services - for sending emails for Invoice and Forget Password
    4.3 Forget Password - Users can change password when Forgot
+   
+Thank You
