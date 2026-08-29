@@ -1,6 +1,3 @@
-Here below is a video summary for better understanding of project
-https://github.com/RahulBhola/Certificates/blob/main/Crop%20Deal%20Project%20Video%20(1)%20(1).mp4
-
 This is a CropDealing website with three users i.e 
 
 1. Farmer: 
